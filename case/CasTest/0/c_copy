@@ -1,0 +1,100 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2206                                  |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    arch        "LSB;label=32;scalar=64";
+    class       volScalarField;
+    location    "0";
+    object      C;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+dimensions      [0 0 0 0 0 0 0];
+
+internalField  uniform 0.3; 
+
+boundaryField
+{
+    movingWall
+    {
+        type zeroGradient;
+        // type            codedFixedValue;
+        // value           uniform 0.3;
+
+        // // Name of generated boundary condition
+        // name    codedTop;
+
+        // code
+        // #{
+        //     //const dictionary& transportProperties = db().lookupObject<IOdictionary>("transportProperties");
+        //     //const scalarField& d = patch().deltaCoeffs();
+        //     //const scalar DC(transportProperties.lookup("DC")); 
+        //     const fvPatch& boundaryPatch = patch();//boundary patch
+        //     const vectorField& Cf = boundaryPatch.Cf();//List of face centers
+        //     scalarField& C = *this;
+        //     const scalarField& C_int = this->patchInternalField();
+        //     const vectorField& U = this->patch().lookupPatchField<volVectorField, vector>("U").patchInternalField();
+
+
+            
+            
+        //     forAll(Cf, faceID)
+        //     {
+        //         //C[faceID] =  0.;
+        //         C[faceID] =  C_int[faceID]*(1.+125.*(U[faceID].z()*0+0.01*(1.-C_int[faceID]/0.66)*(pow((1.-C_int[faceID]),3.2))));//*(1.+0.01*0.0005/0.00001*(1.-C_int[faceID]/0.66)*(pow((1.-C_int[faceID]),3.2)));
+        //     }
+        // #};
+    }
+    floor
+    {
+        type zeroGradient;
+        // type            codedFixedValue;
+        // value           uniform 0.3;
+
+        // // Name of generated boundary condition
+        // name    codedFloor;
+
+        // code
+        // #{
+        //     //const dictionary& transportProperties = db().lookupObject<IOdictionary>("transportProperties");
+        //     //const scalarField& d = patch().deltaCoeffs();
+        //     //const scalar DC(transportProperties.lookup("DC")); 
+        //     const fvPatch& boundaryPatch = patch();//boundary patch
+        //     const vectorField& Cf = boundaryPatch.Cf();//List of face centers
+        //     scalarField& C = *this;
+        //     const scalarField& C_int = this->patchInternalField();
+        //     const vectorField& U = this->patch().lookupPatchField<volVectorField, vector>("U").patchInternalField();
+
+
+            
+            
+        //     forAll(Cf, faceID)
+        //     {
+        //         //C[faceID] =  U[faceID].z();
+        //         C[faceID] =  C_int[faceID]*(1.-125.*(U[faceID].z()+0.01*(1.-C_int[faceID]/0.66)*(pow((1.-C_int[faceID]),3.2))));//*(1.+0.01*0.0005/0.00001*(1.-C_int[faceID]/0.66)*(pow((1.-C_int[faceID]),3.2)));
+        //     }
+        // #};
+    }
+    Inlet
+    {
+        type            cyclic;
+    }
+    Outlet
+    {
+        type            cyclic;
+    }
+    frontAndBack
+    {
+        type            empty;
+    }
+}
+
+
+// ************************************************************************* //
