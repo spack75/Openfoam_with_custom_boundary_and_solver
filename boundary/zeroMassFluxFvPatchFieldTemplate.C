@@ -173,9 +173,6 @@ zeroMassFluxFvPatchScalarField::updateCoeffs()
         //printMessage("updateCoeffs zeroMassFlux");
     }
 
-//{{{ begin code
-    //#line 31 "/home/thiago/OpenFOAM/v2206/OpenFOAM-v2206/tutorials/BEI/dboukFoam/buoyant_suspension/fcteCase/nouveauC/0/C.boundaryField.movingWall"
-// dictionnaires
             const dictionary& transportProperties = db().lookupObject<IOdictionary> ("transportProperties");
             dimensionedScalar DC("DC",dimViscosity,transportProperties);
             dimensionedScalar Cmax("Cmax",transportProperties);
@@ -195,7 +192,7 @@ zeroMassFluxFvPatchScalarField::updateCoeffs()
             
             forAll(Cf, faceID)
             {
-                Cf[faceID] = Cc.ref()[faceID]*(1.+(vst.value()&vn[faceID])/(DC.value()*delta[faceID]));
+                Cf[faceID] = Cc.ref()[faceID]*(1.+(vst.value()&vn[faceID]*(1-Cc.ref()[faceID]/Cmax.value())*(pow((1-Cc.ref()[faceID]),2))/(DC.value()*delta[faceID])));
             }
 
     this->parent_bctype::updateCoeffs();
